@@ -2,17 +2,10 @@
   border: solid 1px black;
 }
 
-header {
+.header {
   background-color: purple;
-  height: 75px;
 }
 
-h1 {
-  color: white;
-}
-
-main {
-  display: flex;
-  flex-direction: row;
-  width: 100vw
+body {
+  text-align: center;
 }

@@ -1,32 +1,42 @@
 import React, {Component} from 'react'
-import Main from './Main/Main'
-import Sidebar from './Sidebar/Sidebar'
+import { Route } from 'react-router-dom';
+import Nav from './Nav/Nav'
+import Landing from './Landing/Landing'
+import EntryList from './EntryList/EntryList'
+import Login from './Login/Login'
+import Register from './Register/Register'
+import AddEntry from './AddEntry/AddEntry'
+import EditEntry from './EditEntry/EditEntry'
+import EntryDetail from './EntryDetail/EntryDetail'
 import './App.css'
 
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      game: ''
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+
+  //   }
+  // }
 
   
 
   render() {
     return (
-      <div>
-        <header>
-          <h1>
-            Twitch Game Search
-          </h1>
-        </header>
-        <main className='App'>
-          <Main />
-          <Sidebar />
-        </main>
-      </div>
+      <>
+        <div className="header">
+          <Route path='/' render={() => <Nav />} />
+        </div>
+        <div className="main">
+          <Route exact path="/" render={() => <Landing />} />
+          <Route exact path="/entries" render={() => <EntryList />} />
+          <Route exact path="/login" render={() => <Login />} />
+          <Route exact path="/register" render={() => <Register />} />
+          <Route exact path="/addNew" render={() => <AddEntry />} />
+          <Route exact path="/update" render={() => <EditEntry />} />
+          <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail  entryId={routeProps}/>} />
+        </div>
+      </>
     );
   }
 }
