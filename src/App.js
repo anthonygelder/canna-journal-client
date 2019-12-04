@@ -15,12 +15,8 @@ class App extends Component {
   // constructor(props) {
   //   super(props)
   //   this.state = {
-
   //   }
   // }
-
-  
-
   render() {
     return (
       <>
@@ -33,8 +29,8 @@ class App extends Component {
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/register" render={() => <Register />} />
           <Route exact path="/addNew" render={() => <AddEntry />} />
-          <Route exact path="/update" render={() => <EditEntry />} />
-          <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail  entryId={routeProps}/>} />
+          <Route exact path="/update" render={(routeProps) => <EditEntry entryId={routeProps}/>} />
+          <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail entryId={routeProps}/>} />
         </div>
       </>
     );

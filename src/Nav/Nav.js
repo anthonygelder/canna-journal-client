@@ -6,7 +6,7 @@ function Nav() {
     return (
         <header>
             <Link to='/'>
-                <h1>Nav</h1>
+                <h1>Canna Journal</h1>
             </Link>
             <div className="buttons">
                 <Link to='/login'>
