@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import Entry from '../Entry/Entry'
-import entries from '../store'
+import Context from '../Context/Context'
 
 class EntryList extends Component {
+    static contextType = Context;
+
     render() {
-        const entriesList = entries.map(entry => (
+        const entriesList = this.context.entries.map(entry => (
             <Entry key={entry.id} entry={entry}/>
         ))
         return (
