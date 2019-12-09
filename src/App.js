@@ -35,7 +35,6 @@ class App extends Component {
   }
 
   editEntry = entry => {
-    console.log('edit')
     const newEntries = this.state.entries.map(ety =>
       (ety.id === entry.id)
         ? entry

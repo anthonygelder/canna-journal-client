@@ -9,7 +9,7 @@ function Nav() {
                 <h1>Canna Journal</h1>
             </Link>
             <div className="buttons">
-                <Link to='/login'>
+                {/* <Link to='/login'>
                     <button>
                         Login
                     </button>
@@ -18,7 +18,7 @@ function Nav() {
                     <button>
                         Register
                     </button>
-                </Link>
+                </Link> */}
             </div>
         </header>
     )

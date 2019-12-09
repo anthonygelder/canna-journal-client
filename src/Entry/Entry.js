@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 import './Entry.css'
 const { API_ENDPOINT } = require('../config')
@@ -35,7 +35,9 @@ class Entry extends Component {
         const updateUrl = '/update/' + entry.id 
         return (
             <div className="entry">
-                <h2>{entry.strain}</h2>
+                <Link to={idUrl}>
+                    <h2>{entry.strain}</h2>
+                </Link>
                 <h3>{entry.farm}</h3>
                 <h3>{entry.rating}</h3>
                 <div className="buttons">
@@ -49,9 +51,6 @@ class Entry extends Component {
                     </button>
                     <Link to={updateUrl}>
                         <button>Edit</button>
-                    </Link>
-                    <Link to={idUrl}>
-                        <button>Details</button>
                     </Link>
                 </div>
             </div>
