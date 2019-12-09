@@ -11,7 +11,7 @@ import EditEntry from './EditEntry/EditEntry'
 import EntryDetail from './EntryDetail/EntryDetail'
 import './App.css'
 
-const { DB_URL } = require('./config')
+const { API_ENDPOINT } = require('./config')
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${DB_URL}`)
+    fetch(`${API_ENDPOINT}`)
       .then(response => response.json())
       .then(data => {
         this.setState({

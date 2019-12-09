@@ -5,6 +5,9 @@ import Context from '../Context/Context'
 
 class EntryList extends Component {
     static contextType = Context;
+    static defaultProps = {
+        entries: []
+      };
 
     render() {
         const entriesList = this.context.entries.map(entry => (

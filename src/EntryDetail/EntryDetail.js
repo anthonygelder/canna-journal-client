@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
-const { DB_URL } = require('../config')
+const { API_ENDPOINT } = require('../config')
 
 class EntryDetail extends Component {
     static contextType = Context;
-    static defaultProps = {
-        entry: {}
-      };
 
     deleteEntry(entryId, cb) {
-        fetch(`${DB_URL}/${entryId}`, {
+        fetch(`${API_ENDPOINT}/${entryId}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

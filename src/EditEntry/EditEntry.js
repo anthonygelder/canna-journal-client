@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 
-const { DB_URL } = require('../config')
+const { API_ENDPOINT } = require('../config')
 
 class EditEntry extends Component {
     static contextType = Context;
@@ -51,7 +51,7 @@ class EditEntry extends Component {
     }
 
     editEntry(entry, cb) {
-        fetch(`${DB_URL}${this.state.id}`, {
+        fetch(`${API_ENDPOINT}${this.state.id}`, {
             method: 'PATCH',
             body: JSON.stringify(entry),
             headers: {

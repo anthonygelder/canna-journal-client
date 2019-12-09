@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 
-const { DB_URL } = require('../config')
+const { API_ENDPOINT } = require('../config')
 
 class AddEntry extends Component {
     static contextType = Context;
@@ -41,7 +41,7 @@ class AddEntry extends Component {
     }
 
     addEntry(entry, cb) {
-        fetch(`${DB_URL}`, {
+        fetch(`${API_ENDPOINT}`, {
             method: 'POST',
             body: JSON.stringify(entry),
             headers: {
