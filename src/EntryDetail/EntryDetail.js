@@ -35,10 +35,10 @@ class EntryDetail extends Component {
         const updateUrl = '/update/' + entry.id 
         return (
             <div>
-                <h1>{ entry.strain }</h1>
-                <h2>{ entry.farm }</h2>
-                <h2>{ entry.rating }</h2>
-                <h4>{ entry.note }</h4>
+                <h2>Strain: { entry.strain }</h2>
+                <h2>Farm: { entry.farm }</h2>
+                <h2>Rating: { entry.rating }</h2>
+                <h4>Note: { entry.note }</h4>
                 <div className="buttons">
                     <Link to='/entries'>
                         <button>Back</button>

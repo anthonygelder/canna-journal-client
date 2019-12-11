@@ -32,15 +32,17 @@ class Entry extends Component {
     render() {
         const { entry } = this.props
         const idUrl = '/entries/' + entry.id 
-        const updateUrl = '/update/' + entry.id 
+        // const updateUrl = '/update/' + entry.id 
         return (
-            <div className="entry">
-                <Link to={idUrl}>
-                    <h2>{entry.strain}</h2>
-                </Link>
-                <h3>{entry.farm}</h3>
-                <h3>{entry.rating}</h3>
-                <div className="buttons">
+            <tr>
+                <td>
+                    <Link to={idUrl}>
+                        <h2>{entry.strain}</h2>
+                    </Link>
+                </td>
+                <td>{entry.farm}</td>
+                <td>{entry.rating}</td>
+                <td>
                     <button onClick={() => {
                         this.deleteEntry(
                             entry.id,
@@ -49,11 +51,29 @@ class Entry extends Component {
                     }}>
                         Delete
                     </button>
-                    <Link to={updateUrl}>
-                        <button>Edit</button>
-                    </Link>
-                </div>
-            </div>
+                </td>
+            </tr>
+            // <div className="entry">
+            //     <Link to={idUrl}>
+            //         <h2>{entry.strain}</h2>
+            //     </Link>
+            //     <h3>{entry.farm}</h3>
+            //     <h3>{entry.rating}</h3>
+            //     <div className="buttons">
+            //         <button onClick={() => {
+            //             this.deleteEntry(
+            //                 entry.id,
+            //                 this.context.deleteEntry
+            //             )
+            //         }}>
+            //             Delete
+            //         </button>
+            //         <Link to={updateUrl}>
+            //             <button>Edit</button>
+            //         </Link>
+            //     </div>
+            // </div>
+
         );
     }
 }

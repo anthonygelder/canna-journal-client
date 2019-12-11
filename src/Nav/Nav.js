@@ -5,7 +5,7 @@ import './Nav.css'
 function Nav() {
     return (
         <header>
-            <Link to='/'>
+            <Link to='/' style={{ textDecoration: 'none' }}>
                 <h1>Canna Journal</h1>
             </Link>
             <div className="buttons">
