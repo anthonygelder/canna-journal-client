@@ -22,9 +22,42 @@ const sortTypes = {
 
 class EntryList extends Component {
     static contextType = Context;
-    state = {
-		currentSort: 'default'
-	};
+    constructor(props) {
+        super(props)
+        this.state = {
+            currentSort: 'default',
+            search: '',
+            entries: []
+        }
+    }
+    
+    updateSearch(search) {
+        this.setState({search: search});
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const searchTerm = this.state.search
+        if (searchTerm === ''){
+            this.setState({
+                entries: this.context.entries
+            })
+        } else {
+            const searchEntries = this.state.entries.filter(entry => entry.strain.includes(searchTerm) || entry.farm.includes(searchTerm))
+            this.setState({
+                entries: searchEntries,
+                search: ''
+            })
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.state.entries > this.context.entries || this.state.entries > this.context.entries) {
+            this.setState({
+                entries: this.context.entries
+            })
+        }
+    }
 
     onSortChange = (column) => {
 		const { currentSort } = this.state;
@@ -61,15 +94,31 @@ class EntryList extends Component {
         })
     }
 
+    componentDidMount() {
+        this.setState({
+            entries: this.context.entries
+        })
+    }
+
     render() {
         // const entriesList = this.context.entries.map(entry => (
         //     <Entry key={entry.id} entry={entry}/>
         // ))
-        const data = this.context.entries
+        const data = this.state.entries
         const { currentSort } = this.state
 
         return (
-            <table className='text-left'>
+            <>
+                <div>
+                    <form className="addEntry" onSubmit={e => this.handleSubmit(e)}>
+                        <div className="form-group">
+                            <label htmlFor="search">Search </label>
+                            <input type="text" name="search" id="search" onChange={e => this.updateSearch(e.target.value)}/>
+                            <button type="submit">Search</button> 
+                        </div>
+                    </form>
+                </div>
+                <table className='text-left'>
                 <thead>
                     <tr>
                         <th>Strain</th>
@@ -112,6 +161,7 @@ class EntryList extends Component {
                     ))}
                 </tbody>
             </table>
+        </>
         // <>
         //     <h1>Entries</h1>
         //     <div className="entry">

@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "name": "canna-journal",
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/.*", "dest": "/index.html" }
+    ]
+  }

@@ -22,8 +22,9 @@ class App extends Component {
   }
 
   addEntry = entry => {
+    const newEntries = [...this.state.entries, entry]
     this.setState({
-      entries: [...this.state.entries, entry]
+      entries: newEntries
     })
   }
 
