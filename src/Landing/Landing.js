@@ -9,12 +9,13 @@ function Landing() {
                 <h2>Canna Journal</h2>
                 <Link to='/entries'>
                     <button>
-                        View Entires
+                        View Entries
                     </button>
                 </Link>
                 {/* <p>Click button above to try out Canna Journal.</p>
                 <p><b>Not optimized for large screens.</b></p>
                 <p>Viewed best on phones.</p> */}
+                {/* <img src={require("../img/insta.jpg")} /> */}
             </section>
             <section>
                 <h2>Keep Track</h2>
@@ -22,7 +23,7 @@ function Landing() {
             </section>
             <section>
                 <h2>Recall</h2>
-                <p>Recall past entries to help you make dicisions on future purchases.</p>
+                <p>Recall past entries to help you make decisions on future purchases.</p>
             </section>
         </>
     )
