@@ -4,22 +4,6 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 const { API_ENDPOINT } = require('../config')
 
-
-const sortTypes = {
-	up: {
-		class: 'sort-up',
-		fn: (a, b) => a.rating - b.rating
-	},
-	down: {
-		class: 'sort-down',
-		fn: (a, b) => b.rating - a.rating
-	},
-	default: {
-		class: 'sort',
-		fn: (a, b) => a
-	}
-};
-
 class EntryList extends Component {
     static contextType = Context;
     constructor(props) {
@@ -37,36 +21,30 @@ class EntryList extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const searchTerm = this.state.search
+        const searchTerm = this.state.search.toLowerCase()
         if (searchTerm === ''){
-            this.setState({
-                entries: this.context.entries
-            })
+            this.resetSearch()
         } else {
-            const searchEntries = this.state.entries.filter(entry => entry.strain.includes(searchTerm) || entry.farm.includes(searchTerm))
+            const searchEntries = this.state.entries.filter(entry => entry.strain.toLowerCase().includes(searchTerm) || entry.farm.toLowerCase().includes(searchTerm))
             this.setState({
-                entries: searchEntries,
-                search: ''
+                entries: searchEntries
             })
         }
     }
 
-    componentDidUpdate() {
-        if (this.state.entries > this.context.entries || this.state.entries > this.context.entries) {
-            this.setState({
-                entries: this.context.entries
-            })
-        }
+    resetSearch = () => {
+        this.setState({
+            entries: this.context.entries,
+            search: ''
+        })
     }
 
-    onSortChange = (column) => {
+    onSortChange = () => {
 		const { currentSort } = this.state;
 		let nextSort;
-
 		if (currentSort === 'down') nextSort = 'up';
 		else if (currentSort === 'up') nextSort = 'default';
 		else if (currentSort === 'default') nextSort = 'down';
-
 		this.setState({
 			currentSort: nextSort
 		});
@@ -88,6 +66,9 @@ class EntryList extends Component {
             })
             .then(data => {
                 cb(entryId)
+                this.setState({
+                    entries: this.context.entries
+                })                
             })
             .catch(error => {
                 console.error(error)
@@ -104,19 +85,41 @@ class EntryList extends Component {
         // const entriesList = this.context.entries.map(entry => (
         //     <Entry key={entry.id} entry={entry}/>
         // ))
+        const sortTypes = {
+            up: {
+                class: 'sort-up',
+                fn: (a, b) => a.rating - b.rating
+            },
+            down: {
+                class: 'sort-down',
+                fn: (a, b) => b.rating - a.rating
+            },
+            default: {
+                class: 'sort',
+                fn: (a, b) => a
+            }
+        };
         const data = this.state.entries
         const { currentSort } = this.state
 
+        let button
+        if (this.state.entries.length < this.context.entries.length) {
+            button = <button onClick={this.resetSearch}>Clear</button>
+        }
+        console.log('state', this.state.entries)
+        console.log('context', this.context.entries)
         return (
             <>
                 <div>
                     <form className="addEntry" onSubmit={e => this.handleSubmit(e)}>
                         <div className="form-group">
                             <label htmlFor="search">Search </label>
-                            <input type="text" name="search" id="search" onChange={e => this.updateSearch(e.target.value)}/>
+                            <input value={this.state.search} type="text" name="search" id="search" onChange={e => this.updateSearch(e.target.value)}/>
                             <button type="submit">Search</button> 
+                            {button}
                         </div>
                     </form>
+                    
                 </div>
                 <table className='text-left'>
                 <thead>
