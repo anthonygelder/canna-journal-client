@@ -29,6 +29,7 @@ class App extends Component {
   }
 
   deleteEntry = entryId => {
+    console.log('delete in app, setting state')
     const newEntries = this.state.entries.filter(entry => entry.id !== entryId)
     this.setState({
       entries: newEntries
@@ -70,7 +71,7 @@ class App extends Component {
           </div>
           <div className="main">
             <Route exact path="/" render={() => <Landing />} />
-            <Route exact path="/entries" render={(props) => <EntryList />} />
+            <Route exact path="/entries" render={(props) => <EntryList props={this.state} />} />
             <Route exact path="/login" render={() => <Login />} />
             <Route exact path="/register" render={() => <Register />} />
             <Route exact path="/addNew" render={(routeProps) => <AddEntry routeProps={routeProps}/>} />

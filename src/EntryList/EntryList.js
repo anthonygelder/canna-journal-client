@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 // import Entry from '../Entry/Entry'
 import Context from '../Context/Context'
+
 const { API_ENDPOINT } = require('../config')
 
 class EntryList extends Component {
@@ -11,10 +12,10 @@ class EntryList extends Component {
         this.state = {
             currentSort: 'default',
             search: '',
-            entries: []
+            entries: [] || this.context.entries
         }
     }
-    
+
     updateSearch(search) {
         this.setState({search: search});
     }
@@ -76,15 +77,14 @@ class EntryList extends Component {
     }
 
     componentDidMount() {
+        console.log('mount')
         this.setState({
             entries: this.context.entries
         })
     }
 
+
     render() {
-        // const entriesList = this.context.entries.map(entry => (
-        //     <Entry key={entry.id} entry={entry}/>
-        // ))
         const sortTypes = {
             up: {
                 class: 'sort-up',
@@ -99,27 +99,38 @@ class EntryList extends Component {
                 fn: (a, b) => a
             }
         };
-        const data = this.state.entries
+        const data = this.state.entries.length === 0 ? this.context.entries : this.state.entries
         const { currentSort } = this.state
 
-        let button
-        if (this.state.entries.length < this.context.entries.length) {
-            button = <button onClick={this.resetSearch}>Clear</button>
+        console.log(this.state.entries, "state")
+        console.log(this.context.entries, "context")
+
+        // let clearButton = <></>
+        // clearButton = this.state.entries.length < this.context.entries.length ? <button onClick={this.resetSearch}>Clear</button> : <></>
+
+        let clearButton
+        if ( this.state.entries.length === 0 || this.state.entries.length ===  this.context.entries.length) {
+            clearButton = <></>
+        } else if (this.state.entries.length < this.context.entries.length ) {
+            clearButton = <button onClick={this.resetSearch}>Clear</button>
         }
-        console.log('state', this.state.entries)
-        console.log('context', this.context.entries)
+        // let clearButton
+        // if (this.state.entries.length < this.context.entries.length ) {
+        //     clearButton = <button onClick={this.resetSearch}>Clear</button>
+        // } else {
+        //     clearButton = <></>
+        // }
         return (
             <>
                 <div>
-                    <form className="addEntry" onSubmit={e => this.handleSubmit(e)}>
+                    <form className="searchEntry" onSubmit={e => this.handleSubmit(e)}>
                         <div className="form-group">
                             <label htmlFor="search">Search </label>
                             <input value={this.state.search} type="text" name="search" id="search" onChange={e => this.updateSearch(e.target.value)}/>
                             <button type="submit">Search</button> 
-                            {button}
+                            {clearButton}
                         </div>
                     </form>
-                    
                 </div>
                 <table className='text-left'>
                 <thead>
@@ -165,25 +176,9 @@ class EntryList extends Component {
                 </tbody>
             </table>
         </>
-        // <>
-        //     <h1>Entries</h1>
-        //     <div className="entry">
-        //     <h2>Strain</h2>
-        //     <h3>Farm</h3>
-        //     <h3>Rating</h3>
-        //     <button onClick={e => this.handleSubmit(e)}>
-        //     </button>
-        //     <div className="buttons">
-        //         <Link to='/addNew'>
-        //             <button>New</button>
-        //         </Link>
-        //     </div>
-        // </div>
-        //     {entriesList}
-        // </>
-
         );
     }
 }
 
 export default EntryList;
+

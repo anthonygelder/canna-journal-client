@@ -18,8 +18,10 @@ class EditEntry extends Component {
     }
     
     componentDidMount() {
+        const defaultEntry = {id:1,strain:'',farm:'',rating:1}
         const urlId = parseInt(this.props.routeProps.match.params.entry_id)
-        const entry = this.context.entries.filter(entry => ( entry.id === urlId )).pop()
+        // const entry = this.context.entries.filter(entry => ( entry.id === urlId )).pop()
+        const entry = this.context.entries.length === 0 ? defaultEntry : this.context.entries.filter(entry => ( entry.id === urlId )).pop()
         this.setState({
             strain: entry.strain,
             farm: entry.farm,
@@ -75,6 +77,7 @@ class EditEntry extends Component {
     }
 
     render() {
+        
         return (
             <form className="updateEntry" onSubmit={e => this.handleSubmit(e)}>
                 <h3>Edit Entry</h3>
