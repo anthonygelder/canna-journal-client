@@ -22,14 +22,13 @@ class App extends Component {
   }
 
   addEntry = entry => {
-    const newEntries = [...this.state.entries, entry]
+    const newEntries = this.state.entries.push(entry)
     this.setState({
       entries: newEntries
     })
   }
 
   deleteEntry = entryId => {
-    console.log('delete in app, setting state')
     const newEntries = this.state.entries.filter(entry => entry.id !== entryId)
     this.setState({
       entries: newEntries

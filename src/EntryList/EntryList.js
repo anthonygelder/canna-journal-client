@@ -12,7 +12,8 @@ class EntryList extends Component {
         this.state = {
             currentSort: 'default',
             search: '',
-            entries: [] || this.context.entries
+            searched: false,
+            entries: []
         }
     }
 
@@ -26,9 +27,11 @@ class EntryList extends Component {
         if (searchTerm === ''){
             this.resetSearch()
         } else {
-            const searchEntries = this.state.entries.filter(entry => entry.strain.toLowerCase().includes(searchTerm) || entry.farm.toLowerCase().includes(searchTerm))
+            const searchEntries = this.context.entries.filter(entry => entry.strain.toLowerCase().includes(searchTerm) || entry.farm.toLowerCase().includes(searchTerm))
+            console.log(searchEntries)
             this.setState({
-                entries: searchEntries
+                entries: searchEntries,
+                searched: true
             })
         }
     }
@@ -36,7 +39,8 @@ class EntryList extends Component {
     resetSearch = () => {
         this.setState({
             entries: this.context.entries,
-            search: ''
+            search: '',
+            searched: false
         })
     }
 
@@ -77,7 +81,6 @@ class EntryList extends Component {
     }
 
     componentDidMount() {
-        console.log('mount')
         this.setState({
             entries: this.context.entries
         })
@@ -101,25 +104,7 @@ class EntryList extends Component {
         };
         const data = this.state.entries.length === 0 ? this.context.entries : this.state.entries
         const { currentSort } = this.state
-
-        console.log(this.state.entries, "state")
-        console.log(this.context.entries, "context")
-
-        // let clearButton = <></>
-        // clearButton = this.state.entries.length < this.context.entries.length ? <button onClick={this.resetSearch}>Clear</button> : <></>
-
-        let clearButton
-        if ( this.state.entries.length === 0 || this.state.entries.length ===  this.context.entries.length) {
-            clearButton = <></>
-        } else if (this.state.entries.length < this.context.entries.length ) {
-            clearButton = <button onClick={this.resetSearch}>Clear</button>
-        }
-        // let clearButton
-        // if (this.state.entries.length < this.context.entries.length ) {
-        //     clearButton = <button onClick={this.resetSearch}>Clear</button>
-        // } else {
-        //     clearButton = <></>
-        // }
+        const clearButton = this.state.searched ? <button onClick={this.resetSearch}>Clear</button> : <></>
         return (
             <>
                 <div>

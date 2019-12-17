@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import EntryDetail from './EntryDetail';
+import Entry from './Entry';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render((<BrowserRouter>
-    <EntryDetail routeProps={{match:{params:{}}}}/>
+    <Entry entry={{id:1}}/>
   </BrowserRouter>), div);
 
   ReactDOM.unmountComponentAtNode(div);

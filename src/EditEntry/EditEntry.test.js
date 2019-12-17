@@ -1,15 +1,13 @@
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from 'react-dom';
 import EditEntry from './EditEntry';
-import { shallow } from 'enzyme';
 
 it('renders without crashing', () => {
-    const routeProps = {
-        match: {
-            params: {
+  const div = document.createElement('div');
+  ReactDOM.render((<BrowserRouter>
+    <EditEntry routeProps={{match:{params:{}}}}/>
+  </BrowserRouter>), div);
 
-            }
-        }   
-    }
-    const entries = []
-  shallow(<EditEntry entries={entries} routeProps={routeProps}/>);
+  ReactDOM.unmountComponentAtNode(div);
 });
