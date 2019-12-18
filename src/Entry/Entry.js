@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 import './Entry.css'
 const { API_ENDPOINT } = require('../config')
@@ -30,13 +29,9 @@ class Entry extends Component {
     }
 
     render() {
-        // const { entry } = this.props
-        // const idUrl = '/entries/' + entry.id 
-        // const updateUrl = '/update/' + entry.id 
         return (
-            <div>
-                
-            </div>
+            <>
+            </>
         );
     }
 }

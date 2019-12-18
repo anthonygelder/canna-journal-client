@@ -17,10 +17,10 @@ class EditEntry extends Component {
         }
     }
     
+    // filtering entries and setting state
     componentDidMount() {
         const defaultEntry = {id:1,strain:'',farm:'',rating:1}
         const urlId = parseInt(this.props.routeProps.match.params.entry_id)
-        // const entry = this.context.entries.filter(entry => ( entry.id === urlId )).pop()
         const entry = this.context.entries.length === 0 ? defaultEntry : this.context.entries.filter(entry => ( entry.id === urlId )).pop()
         this.setState({
             strain: entry.strain,
@@ -31,6 +31,7 @@ class EditEntry extends Component {
         })
     }
 
+    // controlled component state updates 
     updateStrain(strain) {
         this.setState({strain: strain});
     }
@@ -44,7 +45,7 @@ class EditEntry extends Component {
         this.setState({note: note});
     }
     
-    
+    // handling form submit
     handleSubmit(e) {
         e.preventDefault();
         const { id, strain, farm, rating, note } = this.state
@@ -52,6 +53,7 @@ class EditEntry extends Component {
         this.editEntry(editedBookmark, this.context.editEntry)
     }
 
+    // patch request to api
     editEntry(entry, cb) {
         fetch(`${API_ENDPOINT}${this.state.id}`, {
             method: 'PATCH',
@@ -77,20 +79,16 @@ class EditEntry extends Component {
     }
 
     render() {
-        
         return (
-            <form className="updateEntry" onSubmit={e => this.handleSubmit(e)}>
+            <div className="sections">
+                <form className="updateEntry" onSubmit={e => this.handleSubmit(e)}>
                 <h3>Edit Entry</h3>
                 <div className="form-group">
-                    <label htmlFor="strain">Strain 
+                    <label htmlFor="strain">Strain </label>
                     <input required type="text" name="strain" id="strain" value={ this.state.strain } onChange={e => this.updateStrain(e.target.value)}/>
-                    <br></br>
-                    </label>
-                    <label htmlFor="farm">Farm 
+                    <label htmlFor="farm">Farm </label>
                     <input required type="text" name="farm" id="farm" value={ this.state.farm } onChange={e => this.updateFarm(e.target.value)}/>
-                    <br></br>
-                    </label>
-                    <label htmlFor="rating">Rating 
+                    <label htmlFor="rating">Rating </label>
                     <select name="rating" id="rating" value={ this.state.rating } onChange={e => this.updateRating(e.target.value)}>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -98,12 +96,9 @@ class EditEntry extends Component {
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <br></br>
-                    </label>
-                    <label htmlFor="note">Note 
+                    <label htmlFor="note">Note </label>
                     <textarea rows="4" cols="20" name="note" id="note" value={ this.state.note } onChange={e => this.updateNote(e.target.value)}>
                     </textarea>
-                    </label>
                     <div className="buttons">
                         <button type="submit">
                             Update
@@ -113,7 +108,8 @@ class EditEntry extends Component {
                         </Link>
                     </div>
                 </div>
-            </form>
+                </form>
+            </div>
         );
     }
 }

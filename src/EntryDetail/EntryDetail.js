@@ -6,6 +6,7 @@ const { API_ENDPOINT } = require('../config')
 class EntryDetail extends Component {
     static contextType = Context;
 
+    // delete request to api
     deleteEntry(entryId, cb) {
         fetch(`${API_ENDPOINT}/${entryId}`, {
             method: 'DELETE',
@@ -35,12 +36,7 @@ class EntryDetail extends Component {
         const entry = this.context.entries.length === 0 ? defaultEntry : this.context.entries.filter(entry => ( entry.id === urlId )).pop()
         const updateUrl = '/update/' + entry.id 
         return (
-            <div>
-                {/* <h2>Strain: { entry.strain }</h2>
-                <h2>Farm: { entry.farm }</h2>
-                <h2>Rating: { entry.rating }</h2>
-                <h2>Date: { entry.date_created }</h2>
-                <h4>Note: { entry.note }</h4> */}
+            <div className="sections">
                 <table align="right">
                     <tbody>
                         <tr>
@@ -65,7 +61,6 @@ class EntryDetail extends Component {
                         </tr>
                     </tbody>
                 </table>
-
                 <div className="buttons">
                     <Link to='/entries'>
                         <button>Back</button>

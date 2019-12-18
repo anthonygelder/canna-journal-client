@@ -21,6 +21,7 @@ class App extends Component {
     }
   }
 
+  // updating state when new entry is added
   addEntry = entry => {
     const newEntries = this.state.entries.push(entry)
     this.setState({
@@ -28,6 +29,7 @@ class App extends Component {
     })
   }
 
+  // updating state when entry is deleted
   deleteEntry = entryId => {
     const newEntries = this.state.entries.filter(entry => entry.id !== entryId)
     this.setState({
@@ -35,6 +37,7 @@ class App extends Component {
     })
   }
 
+  // updating state when entry is edited
   editEntry = entry => {
     const newEntries = this.state.entries.map(ety =>
       (ety.id === entry.id)
@@ -46,6 +49,7 @@ class App extends Component {
     })
   }
 
+  // get all entries and set state on component mount
   componentDidMount() {
     fetch(`${API_ENDPOINT}`)
       .then(response => response.json())
@@ -64,7 +68,7 @@ class App extends Component {
     }
     return (
       <Context.Provider value={contextValue}>
-        <>
+        <div className="container">
           <div className="header">
             <Route path='/' render={() => <Nav />} />
           </div>
@@ -77,7 +81,8 @@ class App extends Component {
             <Route exact path="/update/:entry_id" render={(routeProps) => <EditEntry routeProps={routeProps}/>} />
             <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail routeProps={routeProps} />} />
           </div>
-        </>
+          <div className="footer"></div>
+        </div>
       </Context.Provider>
     );
   }

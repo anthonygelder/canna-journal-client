@@ -4,18 +4,15 @@ import './Landing.css'
 
 function Landing() {
     return (
-        <>
+        <div class="sections">
             <section>
                 <h2>Canna Journal</h2>
+                <p>Welcome to your personal cannabis journal.</p>
                 <Link to='/entries'>
                     <button>
                         View Entries
                     </button>
                 </Link>
-                {/* <p>Click button above to try out Canna Journal.</p>
-                <p><b>Not optimized for large screens.</b></p>
-                <p>Viewed best on phones.</p> */}
-                {/* <img src={require("../img/insta.jpg")} /> */}
             </section>
             <section>
                 <h2>Keep Track</h2>
@@ -25,7 +22,7 @@ function Landing() {
                 <h2>Recall</h2>
                 <p>Recall past entries to help you make decisions on future purchases.</p>
             </section>
-        </>
+        </div>
     )
 }
 

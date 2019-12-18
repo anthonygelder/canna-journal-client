@@ -8,6 +8,5 @@ it('renders without crashing', () => {
   ReactDOM.render((<BrowserRouter>
     <EntryDetail routeProps={{match:{params:{}}}}/>
   </BrowserRouter>), div);
-
   ReactDOM.unmountComponentAtNode(div);
 });

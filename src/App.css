@@ -1,10 +1,29 @@
-/* * {
-  border: solid 1px black;
-} */
-
 .header {
   background-image: url(./img/terra1-7.png);
-  
+  box-shadow: 0px 0px 8px 8px #444444;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  background-image: url(./img/terra1-7.png);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;   
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+.sections {
+  margin-top: 100px;
 }
 
 body {
@@ -19,6 +38,37 @@ h1 {
   font-family: Lum3;
   font-size: 2.5em;
   letter-spacing: 2px;
+  margin-left: 15px;
+}
+
+button {
+  box-shadow: 0px 4px 2px #444444;
+  background: url(./img/terra1-7.png);
+  border:        0px solid #000000;
+  border-radius: 3px;
+  padding:       5px 8px;
+  color:         #ffffff;
+  display:       inline-block;
+  font:          normal 20px/1 "Calibri", sans-serif;
+  text-align:    center;
+  margin: 4px;
+}
+
+input, textarea, select {
+  width: 60vw;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #000;
+  border: none;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+}
+
+input:hover, textarea:hover {
+  box-shadow: 0 0 4px #000;
 }
 
 @font-face {
