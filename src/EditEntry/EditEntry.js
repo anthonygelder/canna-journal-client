@@ -82,7 +82,7 @@ class EditEntry extends Component {
         return (
             <div className="sections">
                 <form className="updateEntry" onSubmit={e => this.handleSubmit(e)}>
-                <h3>Edit Entry</h3>
+                <h2>Edit Entry</h2>
                 <div className="form-group">
                     <label htmlFor="strain">Strain </label>
                     <input required type="text" name="strain" id="strain" value={ this.state.strain } onChange={e => this.updateStrain(e.target.value)}/>

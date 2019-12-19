@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
+import './EntryDetail.css'
 const { API_ENDPOINT } = require('../config')
 
 class EntryDetail extends Component {
@@ -37,28 +38,29 @@ class EntryDetail extends Component {
         const updateUrl = '/update/' + entry.id 
         return (
             <div className="sections">
-                <table align="right">
+                <h2>Entry</h2>
+                <table className="detail-table">
                     <tbody>
                         <tr>
-                            <th>Strain:</th>
-                            <td>{ entry.strain }</td>
+                            <th align="right">Strain:</th>
+                            <td align="left">{ entry.strain }</td>
                         </tr>
                         <tr>
-                            <th>Farm:</th>
-                            <td>{ entry.farm }</td>
+                            <th align="right">Farm:</th>
+                            <td align="left">{ entry.farm }</td>
                         </tr>
                         <tr>
-                            <th>Rating:</th>
-                            <td>{ entry.rating }</td>
+                            <th align="right">Rating:</th>
+                            <td align="left">{ entry.rating }</td>
                         </tr>
                         <tr>
-                            <th>Note:</th>
-                            <td>{ entry.note }</td>
+                            <th align="right">Note:</th>
+                            <td align="left">{ entry.note }</td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <th>Entry Date:</th>
                             <td>{ entry.date_created }</td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </table>
                 <div className="buttons">

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
-import { IconContext } from "react-icons";
 import { FaSortAmountUp, FaSortAmountDown, FaAlignJustify, FaPlus } from 'react-icons/fa';
 import { IoMdClose } from "react-icons/io";
 import './EntryList.css'
@@ -62,6 +61,7 @@ class EntryList extends Component {
 
     // delete request to api
     deleteEntry(entryId, cb) {
+        // window.confirm("sometext");
         fetch(`${API_ENDPOINT}/${entryId}`, {
             method: 'DELETE',
             headers: {
@@ -117,33 +117,35 @@ class EntryList extends Component {
                 <div>
                     <form className="searchEntry" onSubmit={e => this.handleSubmit(e)}>
                         <div className="form-group">
-                            <label htmlFor="search">Search </label>
+                            <label htmlFor="search">
+                                Search
+                            </label>
                             <input value={this.state.search} type="text" name="search" id="search" onChange={e => this.updateSearch(e.target.value)}/>
-                            <button type="submit">Search</button> 
+                            <button type="submit">Go</button> 
                             {clearButton}
                         </div>
                     </form>
                 </div>
-                <table className='text-left'>
-                <thead>
-                    <tr>
-                        <th>Strain</th>
-                        <th>Farm</th>
-                        <th>
-                            <p onClick={this.onSortChange}>Rating {sortTypes[currentSort].class}</p>
-                        </th>
-                        <th><div className="buttons">
-                            <Link to='/addNew'>
-                                <button>New <FaPlus className="sort" /></button>
-                            </Link>
-                        </div></th>
-                    </tr>
-                </thead>
-                <tbody>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Strain</th>
+                            <th>Farm</th>
+                            <th>
+                                <p onClick={this.onSortChange}>Rating {sortTypes[currentSort].class}</p>
+                            </th>
+                            <th><div className="buttons">
+                                <Link to='/addNew'>
+                                    <button>New <FaPlus className="sort" /></button>
+                                </Link>
+                            </div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {[...data].sort(sortTypes[currentSort].fn).map(p => (
-                        <tr key={p.id} >
+                        <tr key={p.id} className="entry" >
                             <td>
-                                <Link to={`/entries/${p.id}`} style={{ textDecoration: 'none' }}>
+                                <Link to={`/entries/${p.id}`} className="strain" style={{ textDecoration: 'none' }}>
                                     {p.strain}
                                 </Link>
                             </td>

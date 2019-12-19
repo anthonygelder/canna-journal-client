@@ -1,0 +1,17 @@
+.detail-table {
+    margin-bottom: 40px;
+}
+
+.detail-table th {
+    color: black;
+    font-size: 30px;
+}
+
+.detail-table td {
+    color: black;
+    font-size: 30px;
+}
+
+.detail-table tr {
+    padding: 90px;
+}
