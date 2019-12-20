@@ -16,11 +16,11 @@ function Landing() {
             </section>
             <section className='section2'>
                 <h2>Keep Track</h2>
-                <p>Canna Journal helps you keep track of all the different kinds of cannabis you consume and the effects they had.</p>
+                <p>Canna Journal helps you keep track of all of the different kinds of cannabis you consume and the experience you had with it.</p>
             </section>
             <section className="section1">
                 <h2>Recall</h2>
-                <p>Recall past entries to help you make decisions on future purchases.</p>
+                <p>You can easily recall past entries to help you make decisions about future purchases.</p>
             </section>
         </div>
     )

@@ -4,8 +4,6 @@ import Context from './Context/Context'
 import Nav from './Nav/Nav'
 import Landing from './Landing/Landing'
 import EntryList from './EntryList/EntryList'
-import Login from './Login/Login'
-import Register from './Register/Register'
 import AddEntry from './AddEntry/AddEntry'
 import EditEntry from './EditEntry/EditEntry'
 import EntryDetail from './EntryDetail/EntryDetail'
@@ -75,16 +73,12 @@ class App extends Component {
           <div className="main">
             <Route exact path="/" render={() => <Landing />} />
             <Route exact path="/entries" render={(props) => <EntryList props={this.state} />} />
-            <Route exact path="/login" render={() => <Login />} />
-            <Route exact path="/register" render={() => <Register />} />
             <Route exact path="/addNew" render={(routeProps) => <AddEntry routeProps={routeProps}/>} />
             <Route exact path="/update/:entry_id" render={(routeProps) => <EditEntry routeProps={routeProps}/>} />
             <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail routeProps={routeProps} />} />
           </div>
         </div>
         <div className="footer">
-          {/* <p><a href="https://github.com/anthonygelder/canna-journal-client" rel="noopener noreferrer" target="_blank">client repo</a></p>
-          <p><a href="https://github.com/anthonygelder/canna-journal-server" rel="noopener noreferrer" target="_blank">server repo</a></p> */}
         </div>
       </Context.Provider>
     );
