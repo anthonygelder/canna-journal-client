@@ -132,7 +132,7 @@ class EntryList extends Component {
                             <th>Strain</th>
                             <th>Farm</th>
                             <th>
-                                <p onClick={this.onSortChange}>Rating {sortTypes[currentSort].class}</p>
+                                <p onClick={this.onSortChange} className="rating">Rating {sortTypes[currentSort].class}</p>
                             </th>
                             <th><div className="buttons">
                                 <Link to='/addNew'>

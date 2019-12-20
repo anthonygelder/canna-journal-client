@@ -81,7 +81,10 @@ class App extends Component {
             <Route exact path="/update/:entry_id" render={(routeProps) => <EditEntry routeProps={routeProps}/>} />
             <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail routeProps={routeProps} />} />
           </div>
-          <div className="footer"></div>
+        </div>
+        <div className="footer">
+          {/* <p><a href="https://github.com/anthonygelder/canna-journal-client" rel="noopener noreferrer" target="_blank">client repo</a></p>
+          <p><a href="https://github.com/anthonygelder/canna-journal-server" rel="noopener noreferrer" target="_blank">server repo</a></p> */}
         </div>
       </Context.Provider>
     );

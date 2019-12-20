@@ -28,8 +28,11 @@
     color: #000000;
 }
 
-.strain:hover {
-    color: greenyellow;
+.strain:hover, .rating:hover {
+    cursor: pointer;
+    -webkit-text-fill-color: darkslategrey;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
 
 .entry {
@@ -43,11 +46,10 @@
 .table {
     border-collapse: collapse;
     width: 90%;
-    overflow: visible;
 }
 
 @media only screen and (max-width: 600px) {
-    .table {
+    .table, .detail-table {
         width: 100%;
     }
 }
