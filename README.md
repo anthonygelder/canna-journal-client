@@ -15,6 +15,3 @@ When you walk into a cannabis store, it is often over whelming. There are so man
 
 ### Tech
 React
-Node
-Express
-Postgres
