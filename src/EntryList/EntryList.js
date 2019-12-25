@@ -62,7 +62,7 @@ class EntryList extends Component {
     // delete request to api
     deleteEntry(entryId, cb) {
         // window.confirm("sometext");
-        fetch(`${API_ENDPOINT}/${entryId}`, {
+        fetch(`${API_ENDPOINT}${entryId}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -92,6 +92,17 @@ class EntryList extends Component {
             entries: this.context.entries
         })
     }
+
+      // get all entries and set state on component mount
+  componentDidMount() {
+    fetch(`${API_ENDPOINT}/entries`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          entries: data
+        })
+    })
+  }
 
     render() {
         const sortTypes = {
