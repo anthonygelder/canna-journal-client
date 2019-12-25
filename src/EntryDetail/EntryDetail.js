@@ -9,7 +9,7 @@ class EntryDetail extends Component {
 
     // delete request to api
     deleteEntry(entryId, cb) {
-        fetch(`${API_ENDPOINT}/${entryId}`, {
+        fetch(`${API_ENDPOINT}/entries/${entryId}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

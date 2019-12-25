@@ -55,7 +55,7 @@ class EditEntry extends Component {
 
     // patch request to api
     editEntry(entry, cb) {
-        fetch(`${API_ENDPOINT}${this.state.id}`, {
+        fetch(`${API_ENDPOINT}/entries/${this.state.id}`, {
             method: 'PATCH',
             body: JSON.stringify(entry),
             headers: {

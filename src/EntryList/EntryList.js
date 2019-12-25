@@ -62,7 +62,7 @@ class EntryList extends Component {
     // delete request to api
     deleteEntry(entryId, cb) {
         // window.confirm("sometext");
-        fetch(`${API_ENDPOINT}/${entryId}`, {
+        fetch(`${API_ENDPOINT}/entries/${entryId}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

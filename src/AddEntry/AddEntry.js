@@ -46,7 +46,7 @@ class AddEntry extends Component {
 
     // post request to api
     addEntry(entry, cb) {
-        fetch(`${API_ENDPOINT}`, {
+        fetch(`${API_ENDPOINT}/entries`, {
             method: 'POST',
             body: JSON.stringify(entry),
             headers: {

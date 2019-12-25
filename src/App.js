@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
-import { Route } from 'react-router-dom';
-import Context from './Context/Context'
+import { Route, Switch } from 'react-router-dom';
 import Nav from './Nav/Nav'
+import PrivateRoute from './Utils/PrivateRoute'
+import PublicOnlyRoute from './Utils/PublicOnlyRoute'
+import LoginPage from './routes/LoginPage/LoginPage'
+import RegistrationPage from './routes/RegistrationPage/RegistrationPage'
 import Landing from './Landing/Landing'
 import EntryList from './EntryList/EntryList'
 import AddEntry from './AddEntry/AddEntry'
@@ -9,78 +12,34 @@ import EditEntry from './EditEntry/EditEntry'
 import EntryDetail from './EntryDetail/EntryDetail'
 import './App.css'
 
-const { API_ENDPOINT } = require('./config')
-
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      entries: []
-    }
+  state = { hasError: false }
+
+  static getDerivedStateFromError(error) {
+    console.error(error)
+    return { hasError: true }
   }
 
-  // updating state when new entry is added
-  addEntry = entry => {
-    const newEntries = this.state.entries.push(entry)
-    this.setState({
-      entries: newEntries
-    })
-  }
-
-  // updating state when entry is deleted
-  deleteEntry = entryId => {
-    const newEntries = this.state.entries.filter(entry => entry.id !== entryId)
-    this.setState({
-      entries: newEntries
-    })
-  }
-
-  // updating state when entry is edited
-  editEntry = entry => {
-    const newEntries = this.state.entries.map(ety =>
-      (ety.id === entry.id)
-        ? entry
-        : ety
-    )
-    this.setState({
-      entries: newEntries
-    })
-  }
-
-  // get all entries and set state on component mount
-  componentDidMount() {
-    fetch(`${API_ENDPOINT}`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          entries: data
-        })
-    })
-  }
   render() {
-    const contextValue = {
-      entries: this.state.entries,
-      deleteEntry: this.deleteEntry,
-      addEntry: this.addEntry,
-      editEntry: this.editEntry
-    }
     return (
-      <Context.Provider value={contextValue}>
         <div className="container">
-          <div className="header">
+          <header className="header">
             <Route path='/' render={() => <Nav />} />
-          </div>
-          <div className="main">
-            <Route exact path="/" render={() => <Landing />} />
-            <Route exact path="/entries" render={(props) => <EntryList props={this.state} />} />
-            <Route exact path="/addNew" render={(routeProps) => <AddEntry routeProps={routeProps}/>} />
-            <Route exact path="/update/:entry_id" render={(routeProps) => <EditEntry routeProps={routeProps}/>} />
-            <Route exact path="/entries/:entry_id" render={(routeProps) => <EntryDetail routeProps={routeProps} />} />
-          </div>
-        </div>
-        <div className="footer">
-        </div>
-      </Context.Provider>
+          </header>
+          <main className="main">
+            {this.state.hasError && <p className='red'>There was an error! Oh no!</p>}
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <PublicOnlyRoute path="/login" component={LoginPage}/>
+              <PublicOnlyRoute path="/register" component={RegistrationPage}/>
+              <PublicOnlyRoute path="/entries" render={(props) => <EntryList props={this.state} />} />
+              <PrivateRoute path="/addNew" render={(routeProps) => <AddEntry routeProps={routeProps}/>} />
+              <PrivateRoute path="/update/:entry_id" render={(routeProps) => <EditEntry routeProps={routeProps}/>} />
+              <PrivateRoute path="/entries/:entry_id" render={(routeProps) => <EntryDetail routeProps={routeProps} />} />
+            </Switch>
+          </main>
+        <div className="footer"></div>
+      </div>
     );
   }
 }
