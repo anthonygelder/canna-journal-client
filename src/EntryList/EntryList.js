@@ -14,7 +14,7 @@ class EntryList extends Component {
             currentSort: 'default',
             search: '',
             searched: false,
-            entries: []
+            entries: [] || this.context.entries
         }
     }
 
@@ -92,17 +92,6 @@ class EntryList extends Component {
             entries: this.context.entries
         })
     }
-
-      // get all entries and set state on component mount
-  componentDidMount() {
-    fetch(`${API_ENDPOINT}/entries`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          entries: data
-        })
-    })
-  }
 
     render() {
         const sortTypes = {
