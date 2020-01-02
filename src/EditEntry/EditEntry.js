@@ -19,9 +19,9 @@ class EditEntry extends Component {
     
     // filtering entries and setting state
     componentDidMount() {
-        const defaultEntry = {id:1,strain:'',farm:'',rating:1}
+        const entries = this.props.routeProps.location.entries.data
         const urlId = parseInt(this.props.routeProps.match.params.entry_id)
-        const entry = this.context.entries.length === 0 ? defaultEntry : this.context.entries.filter(entry => ( entry.id === urlId )).pop()
+        const entry = entries.filter(entry => ( entry.id === urlId )).pop()
         this.setState({
             strain: entry.strain,
             farm: entry.farm,

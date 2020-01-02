@@ -8,7 +8,7 @@ class EntryDetail extends Component {
     static contextType = Context;
 
     // delete request to api
-    deleteEntry(entryId, cb) {
+    deleteEntry(entryId) {
         fetch(`${API_ENDPOINT}/${entryId}`, {
             method: 'DELETE',
             headers: {
@@ -22,8 +22,7 @@ class EntryDetail extends Component {
                 })
             }
             })
-            .then(data => {
-                cb(entryId)
+            .then(() => {
                 this.props.routeProps.history.push('/entries')
             })
             .catch(error => {
@@ -32,9 +31,9 @@ class EntryDetail extends Component {
     }
 
     render() {
-        const defaultEntry = {id:1,strain:'',farm:'',rating:1}
+        const entries = this.props.routeProps.location.entries.data
         const urlId = parseInt(this.props.routeProps.match.params.entry_id)
-        const entry = this.context.entries.length === 0 ? defaultEntry : this.context.entries.filter(entry => ( entry.id === urlId )).pop()
+        const entry = entries.filter(entry => ( entry.id === urlId )).pop()
         const updateUrl = '/update/' + entry.id 
         return (
             <div className="sections">
@@ -57,10 +56,6 @@ class EntryDetail extends Component {
                             <th align="right">Note:</th>
                             <td align="left">{ entry.note }</td>
                         </tr>
-                        {/* <tr>
-                            <th>Entry Date:</th>
-                            <td>{ entry.date_created }</td>
-                        </tr> */}
                     </tbody>
                 </table>
                 <div className="buttons">
@@ -71,10 +66,7 @@ class EntryDetail extends Component {
                         <button>Edit</button>
                     </Link>
                     <button onClick={() => {
-                        this.deleteEntry(
-                            entry.id,
-                            this.context.deleteEntry
-                        )
+                        this.deleteEntry(entry.id)
                     }}>
                         Delete
                     </button>
